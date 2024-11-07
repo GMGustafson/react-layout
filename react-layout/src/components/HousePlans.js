@@ -8,7 +8,7 @@ const HousePlans = () => {
     //wait until after page is rendered to do the asyncronous loading
     useEffect(()=>{
         (async() => {
-            const response = await axios.get("https://portiaportia.github.io/json/house-plans.json");
+            const response = await axios.get("http://localhost:3001/api/house_plans");
             setHouses(response.data);
         })();
     },[]);
