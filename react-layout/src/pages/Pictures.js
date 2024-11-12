@@ -1,6 +1,12 @@
-const Picture = () => {
-    return <h1> Pictures Page</h1>;
-};
-    
-export default Picture; 
+import SlideShow from "../components/SlideShow";
 
+const Pictures = () => {
+  return (
+    <>
+      <h1>Pictures Page</h1>
+      <SlideShow />
+    </>
+  );
+};
+
+export default Pictures;

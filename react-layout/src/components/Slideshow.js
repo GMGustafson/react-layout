@@ -1,4 +1,3 @@
-
 import "../css/SlideShow.css";
 import {useState} from "react";
 

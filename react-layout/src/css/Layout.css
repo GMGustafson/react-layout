@@ -1,25 +1,24 @@
-#main-nav 
-{ 
-    background-color: pink;
-
-}
-#main-nav li
-{ 
+#main-nav {
+    background: pink;
+  }
+  
+  #main-nav li {
     list-style-type: none;
-}
-
-.hide-small
-{ 
+    padding: 5px;
+  }
+  
+  #main-nav li a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .hide-small {
     display: none;
-}
-
-/* Media Query */ 
-
-@media only screen and (min-width: 768px) {
-
-    .hide-small
-    { 
-        display: flex;
+  }
+  
+  /* Media Query  for larger screens*/
+  @media only screen and (min-width: 768px) {
+    .hide-small {
+      display: flex;
     }
-
-}
+  }
