@@ -1,9 +1,11 @@
 import {useState, useEffect } from "react";
 import axios from "axios";
 import HousePlan from "./HousePlan";
+import AddHousePlan from "./AddHousePlans";
 
 const HousePlans = () => {
     const [houses, setHouses] = useState([]);
+    const [showAddDialog, setShowAddDialog] = useState(false); 
 
     //wait until after page is rendered to do the asyncronous loading
     useEffect(()=>{
@@ -13,9 +15,28 @@ const HousePlans = () => {
         })();
     },[]);
 
+    const openAddDialog = () => { 
+        setShowAddDialog(true); 
+    };
+    const closeAddDialog = () => {
+        setShowAddDialog(false); 
+    };
+    const updateHousePlans = (housePlan) => {
+        setHouses((houses)=>[...houses, housePlan]);
+    };
+
     return (
        <div className="house-plans">
         <h3>House Plans</h3>
+
+        <button id ="addHouse" onClick={openAddDialog}>+</button>
+        
+        {showAddDialog ?(
+            <AddHousePlan closeDialog={closeAddDialog} showNewHouse={updateHousePlans}
+            />):("")}
+        
+
+
         {houses.map((housePlan)=>(
             <HousePlan
                 name={housePlan.name} 
