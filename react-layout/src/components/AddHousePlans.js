@@ -1,49 +1,44 @@
-
 import "../css/Dialog.css";
 import React, { useState } from "react";
-//inputs.img != null ? URL.createObjectURL(inputs.img) : ""
 
 const AddHousePlan = (props) => {
+  const [inputs, setInputs] = useState({});
+  const [result, setResult] = useState("");
 
-  const[inputs, setInputs] = useState({});
-  const[result,setResult] = useState(""); 
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values)=>({...values,[name]:value}));
+  };
 
-  const handleChange = (event) => { 
-    const name = event.target.name; 
-    const value = event.target.value; 
-    setInputs((values)=>({...values, [name]:value})); 
-  }
+  const handleImageChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.files[0];
+    setInputs((values)=>({...values,[name]:value}));
+  };
 
-  const handleImageChange = (event) => { 
-    const name = event.target.name; 
-    const value = event.target.files[0]; 
-    setInputs((values)=>({...values, [name]:value})); 
-  }
+  const addToServer = async(event) => {
+    event.preventDefault();
+    setResult("Sending....");
 
-  const addToServer = async(event) => { 
-    event.preventDefault(); 
-    setResult("Sending.."); 
-
-    const formData = new FormData(event.target); 
+    const formData = new FormData(event.target);
     console.log(...formData);
-    
-    const response = await fetch("http://localhost:3001/api/house_plans", {
-      method:"POST", 
+
+    const response = await fetch("http://localhost:3001/api/house_plans/",{
+      method:"POST",
       body:formData
-    }); 
+    });
 
-    if (response.status == 200) {
-      setResult("House Plan successfully added"); 
-      props.showNewHouse(await response.json()); 
-      event.target.reset();   
-      props.closeDialog(); 
+    if(response.status == 200){
+      setResult("House Plan successfully added!");
+      props.showNewHouse(await response.json());
+      event.target.reset();
+      props.closeDialog();
+    } else {
+      setResult("Error adding house");
     }
-    else 
-    { 
-      setResult("Error adding House"); 
-    }
+  };
 
-  }
 
   return (
     <div id="add-dialog" className="w3-modal">
@@ -63,16 +58,16 @@ const AddHousePlan = (props) => {
             </p>
             <p>
               <label htmlFor="bedrooms">Bedrooms:</label>
-              <input type="number" id="bedrooms" name="bedrooms" required  value={inputs.bedrooms || ""} onChange={handleChange}/>
+              <input type="number" id="bedrooms" name="bedrooms" required value={inputs.bedrooms || ""} onChange={handleChange}/>
             </p>
             <p>
               <label htmlFor="bathrooms">Bathrooms:</label>
-              <input type="number" id="bathrooms" name="bathrooms" required  value={inputs.bathrooms  || ""} onChange={handleChange}/>
+              <input type="number" id="bathrooms" name="bathrooms" required value={inputs.bathrooms || ""} onChange={handleChange}/>
             </p>
 
             <section className="columns">
               <p id="img-prev-section">
-                <img id="img-prev" alt="" src = {inputs.img != null ? URL.createObjectURL(inputs.img): ""}/>  
+                <img id="img-prev" alt="" src={inputs.img != null ? URL.createObjectURL(inputs.img) : ""}/>
               </p>
               <p id="img-upload">
                 <label htmlFor="img">Upload Image:</label>

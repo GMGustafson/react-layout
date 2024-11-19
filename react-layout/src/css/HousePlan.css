@@ -1,26 +1,31 @@
-.house {
-    background: skyblue;
-    margin: 2%;
-    padding: 2%;
-    border-radius: 5px;
+.house-plan {
+  background-color: #d98282;
+  padding: 5px;
+  margin: 10px;
+}
+
+.feature-image {
+  max-width: 25%;
+  width: fit-content;
+}
+
+.house-plan img {
+  max-width: 90%;
+}
+
+#change-buttons {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+#change-buttons a {
+  text-decoration: none;
+  font-size: 1.5em;
+  margin-right: 20px;
+}
+
+@media screen and (min-width: 600px) {
+  .columns {
+    display: flex;
   }
-  
-  .house img {
-    display: block;
-    margin: auto;
-    max-width: 90%;
-  }
-  
-  .house h3 {
-    font-size: 2em;
-  }
-  
-  @media screen and (min-width: 768px) {
-    .columns {
-      display: flex;
-    }
-  
-    .house {
-      max-width: 25%;
-    }
-  }
+}
